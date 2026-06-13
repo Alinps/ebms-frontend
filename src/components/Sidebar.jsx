@@ -22,6 +22,11 @@ function Sidebar({ isOpen }) {
             name:"Borrow Equipments",
             path:"/admin/borrow-equipment/",
             icon: "bi-arrow-repeat"
+        },
+        {
+            name: "Borrow History",
+            path: "/admin/borrow-history",
+            icon: "bi-clock-history"
         }
     ];
 
