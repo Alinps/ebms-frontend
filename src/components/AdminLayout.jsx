@@ -20,7 +20,7 @@ function AdminLayout() {
                     <div className="p-2 border-bottom bg-light">
 
                         <button
-                            className="btn btn-dark"
+                            className="btn btn-light"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             <i className="bi bi-list"></i>

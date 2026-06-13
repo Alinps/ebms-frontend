@@ -16,13 +16,14 @@ function Navbar() {
     };
 
     return (
+
         <nav className="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
 
             <div className="container-fluid px-4">
 
                 <div>
                     <h5 className="mb-0 fw-bold">
-                        Equipment Borrowing Management System
+                        EBMS
                     </h5>
 
                     <small className="text-muted">
@@ -30,43 +31,64 @@ function Navbar() {
                     </small>
                 </div>
 
-                <div className="d-flex align-items-center">
+                {/* Toggle Button */}
 
-                    <div className="text-end me-3">
+                <button
+                    className="navbar-toggler bg-light "
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarContent"
+                >
+                   <i class="bi bi-list"></i>
+                </button>
 
-                        <div className="fw-semibold">
-                            {user?.name || "Administrator"}
+                {/* Collapsible Content */}
+
+                <div
+                    className="collapse navbar-collapse justify-content-end"
+                    id="navbarContent"
+                >
+
+                    <div className="d-flex align-items-center mt-3 mt-lg-0">
+
+                        <div className="text-end me-3">
+
+                            <div className="fw-semibold">
+                                {user?.name || "Administrator"}
+                            </div>
+
+                            <small className="text-muted">
+                                {user?.email || "Admin User"}
+                            </small>
+
                         </div>
 
-                        <small className="text-muted">
-                            {user?.email || "Admin User"}
-                        </small>
+                        <div
+                            className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
+                            style={{
+                                width: "42px",
+                                height: "42px"
+                            }}
+                        >
+                            <i className="bi bi-person-fill"></i>
+                        </div>
+
+                        <button
+                            className="btn btn-outline-danger"
+                            onClick={handleLogout}
+                        >
+                            <i className="bi bi-box-arrow-right me-2"></i>
+                            Logout
+                        </button>
 
                     </div>
-
-                    <div
-                        className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
-                        style={{
-                            width: "42px",
-                            height: "42px"
-                        }}
-                    >
-                        <i className="bi bi-person-fill"></i>
-                    </div>
-
-                    <button
-                        className="btn btn-outline-danger"
-                        onClick={handleLogout}
-                    >
-                        <i className="bi bi-box-arrow-right me-2"></i>
-                        Logout
-                    </button>
 
                 </div>
 
             </div>
 
         </nav>
+
     );
 }
 

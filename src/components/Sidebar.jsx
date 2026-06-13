@@ -5,7 +5,7 @@ function Sidebar({ isOpen }) {
     const menuItems = [
         {
             name: "Dashboard",
-            path: "/admin/dashboard",
+            path: "/admin/dashboard/stats",
             icon: "bi-speedometer2"
         },
         {
@@ -30,7 +30,7 @@ function Sidebar({ isOpen }) {
         },
         {
             name:"Active Borrowings",
-            path: "/admin/borrow-history/active",
+            path: "/admin/borrow/history/active",
             icon: "bi-arrow-left-right"
         }
     ];

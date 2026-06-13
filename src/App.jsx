@@ -13,20 +13,8 @@ import BorrowEquipment from "./pages/BorrowEquipment";
 import BorrowHistory from "./pages/BorrowHistory";
 import ActiveBorrowings from "./pages/ActiveBorrowings";
 import BorrowerHistory from "./pages/BorrowerHistory";
+import Dashboard from "./pages/Dashboard";
 import { useSelector } from "react-redux";
-
-function Dashboard() {
-
-  
-      const user  = useSelector(store=> store.auth.user);
-
-
-    return (
-        <div className="container mt-5">
-            <h2>Welcome {user}</h2>
-        </div>
-    );
-}
 
 function App() {
 
@@ -84,12 +72,16 @@ function App() {
                             element={<BorrowHistory />}
                         />
                         <Route
-                            path="/admin/borrow-history/active"
+                            path="/admin/borrow/history/active"
                             element={<ActiveBorrowings />}
                         />
                         <Route
                             path="/admin/borrower/history/:id"
                             element={<BorrowerHistory />}
+                        />
+                        <Route
+                            path="/admin/dashboard/stats"
+                            element={<Dashboard />}
                         />
                     </Route>
 
