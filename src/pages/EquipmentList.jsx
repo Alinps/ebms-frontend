@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
+import DeleteEquipmentModal from "../components/DeleteEquipmentModal";
 
 function EquipmentList() {
 
     const [equipments, setEquipments] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    const [selectedEquipment, setSelectedEquipment] = useState(null);
 
     useEffect(() => {
         fetchEquipments();
@@ -29,6 +33,14 @@ function EquipmentList() {
     const clickAddEquipment = ()=>{
         navigate("/admin/add-equipment");
     }
+
+    const handleDeleteClick = (equipment) => {
+
+    setSelectedEquipment(equipment);
+
+    setShowDeleteModal(true);
+
+};
 
     if (loading) {
         return (
@@ -180,10 +192,8 @@ function EquipmentList() {
                                         <i className="bi bi-pencil-square"></i>
                                     </button>
 
-                                    <button
-                                        className="btn btn-outline-danger btn-sm"
-                                        title="Delete"
-                                    >
+                                   <button className="btn btn-outline-danger btn-sm"
+                                            onClick={() => handleDeleteClick(equipment) }>
                                         <i className="bi bi-trash"></i>
                                     </button>
 
@@ -202,6 +212,15 @@ function EquipmentList() {
         </div>
 
     </div>
+
+
+    <DeleteEquipmentModal 
+    show={showDeleteModal}
+    equipmentId={selectedEquipment?._id}
+    equipmentName={selectedEquipment?.name}
+    onClose={() => setShowDeleteModal(false)}
+    onDeleteSuccess={() => fetchEquipments() }
+    />
 
 </div>
     );
