@@ -9,6 +9,7 @@ import AddEquipment from "./pages/AddEquipment";
 import AddBorrower from "./pages/AddBorrower";
 import EditEquipment from "./pages/EditEquipment";
 import EditBorrower from "./pages/EditBorrower";
+import BorrowEquipment from "./pages/BorrowEquipment";
 import { useSelector } from "react-redux";
 
 function Dashboard() {
@@ -70,6 +71,10 @@ function App() {
                         <Route
                             path="/admin/edit-borrower/:id"
                             element={<EditBorrower />}
+                        />
+                        <Route
+                            path="/admin/borrow-equipment/"
+                            element={<BorrowEquipment />}
                         />
 
                     </Route>

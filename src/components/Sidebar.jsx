@@ -17,6 +17,11 @@ function Sidebar({ isOpen }) {
             name: "Borrowers",
             path: "/admin/borrowers",
             icon: "bi-people"
+        },
+        {
+            name:"Borrow Equipments",
+            path:"/admin/borrow-equipment/",
+            icon: "bi-arrow-repeat"
         }
     ];
 
