@@ -188,6 +188,7 @@ function EquipmentList() {
                                     <button
                                         className="btn btn-outline-warning btn-sm me-2"
                                         title="Edit"
+                                        onClick={()=> navigate(`/admin/edit-equipment/${equipment._id}`)}
                                     >
                                         <i className="bi bi-pencil-square"></i>
                                     </button>

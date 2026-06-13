@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
+import DeleteBorrowerModal from "../components/DeleteBorrowerModal";
 
 function BorrowerList() {
 
     const [borrowers, setBorrowers] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedBorrower, setSelectedBorrower] = useState(null);
+    const [success, setSuccess] = useState("");
 
     useEffect(() => {
         fetchBorrowers();
@@ -30,6 +34,14 @@ function BorrowerList() {
 
         }
     };
+
+    const handleDeleteClick = (borrower) => {
+
+    setSelectedBorrower(borrower);
+
+    setShowDeleteModal(true);
+
+};
 
     if (loading) {
         return (
@@ -97,6 +109,19 @@ function BorrowerList() {
     </div>
 
 </div>
+{
+    success && (
+
+        <div className="alert alert-success">
+
+            <i className="bi bi-check-circle-fill me-2"></i>
+
+            {success}
+
+        </div>
+
+    )
+}
 
                     <div className="table-responsive">
 
@@ -164,13 +189,14 @@ function BorrowerList() {
                         <i className="bi bi-pencil-square"></i>
                     </button>
 
-                    <button
+                   <button
                         className="btn btn-outline-danger btn-sm"
-                        title="Delete"
+                        onClick={() =>
+                            handleDeleteClick(borrower)
+                        }
                     >
                         <i className="bi bi-trash"></i>
                     </button>
-
                 </td>
 
             </tr>
@@ -186,6 +212,16 @@ function BorrowerList() {
                 </div>
 
             </div>
+
+            <DeleteBorrowerModal 
+                show={showDeleteModal}
+                borrowerId={ selectedBorrower?._id }
+                borrowerName={ selectedBorrower?.name }
+                onClose={() => setShowDeleteModal(false) }
+                onDeleteSuccess={(message) => {
+                    setSuccess(message);
+                    fetchBorrowers();
+                }}/>
 
         </div>
     );
