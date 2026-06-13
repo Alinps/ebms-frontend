@@ -11,6 +11,8 @@ import EditEquipment from "./pages/EditEquipment";
 import EditBorrower from "./pages/EditBorrower";
 import BorrowEquipment from "./pages/BorrowEquipment";
 import BorrowHistory from "./pages/BorrowHistory";
+import ActiveBorrowings from "./pages/ActiveBorrowings";
+import BorrowerHistory from "./pages/BorrowerHistory";
 import { useSelector } from "react-redux";
 
 function Dashboard() {
@@ -80,6 +82,14 @@ function App() {
                         <Route
                             path="/admin/borrow-history/"
                             element={<BorrowHistory />}
+                        />
+                        <Route
+                            path="/admin/borrow-history/active"
+                            element={<ActiveBorrowings />}
+                        />
+                        <Route
+                            path="/admin/borrower/history/:id"
+                            element={<BorrowerHistory />}
                         />
                     </Route>
 

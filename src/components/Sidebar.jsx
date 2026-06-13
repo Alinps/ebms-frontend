@@ -27,6 +27,11 @@ function Sidebar({ isOpen }) {
             name: "Borrow History",
             path: "/admin/borrow-history",
             icon: "bi-clock-history"
+        },
+        {
+            name:"Active Borrowings",
+            path: "/admin/borrow-history/active",
+            icon: "bi-arrow-left-right"
         }
     ];
 

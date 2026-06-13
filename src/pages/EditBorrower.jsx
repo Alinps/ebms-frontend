@@ -8,10 +8,8 @@ function EditBorrower() {
 
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
-
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -30,31 +28,21 @@ function EditBorrower() {
             setLoading(true);
 
             const response = await api.get(`/admin/borrower/${id}`);
-
             const borrower = response.data.data;
 
             setFormData({
-                name:
-                    borrower.name || "",
-                email:
-                    borrower.email || "",
-                phoneNumber:
-                    borrower.phoneNumber || "",
-                department:
-                    borrower.department || ""
+                name: borrower.name || "",
+                email: borrower.email || "",
+                phoneNumber: borrower.phoneNumber || "",
+                department: borrower.department || ""
             });
 
         } catch (error) {
 
-            setError(
-                error?.response?.data?.message ||
-                error.message
-            );
+            setError(error?.response?.data?.message || error.message);
 
         } finally {
-
             setLoading(false);
-
         }
 
     };
@@ -62,9 +50,7 @@ function EditBorrower() {
     const handleChange = (e) => {
 
         setFormData({
-            ...formData,
-            [e.target.name]:
-                e.target.value
+            ...formData,[e.target.name]:e.target.value
         });
 
     };
@@ -79,15 +65,9 @@ function EditBorrower() {
             setError("");
             setSuccess("");
 
-            const response =
-                await api.put(
-                    `/admin/edit-borrower/${id}`,
-                    formData
-                );
+            const response = await api.put(`/admin/edit-borrower/${id}`,formData);
 
-            setSuccess(
-                "Borrower updated successfully"
-            );
+            setSuccess("Borrower updated successfully");
 
         } catch (error) {
 
@@ -98,9 +78,7 @@ function EditBorrower() {
             );
 
         } finally {
-
             setSaving(false);
-
         }
 
     };
@@ -127,54 +105,34 @@ function EditBorrower() {
 
                         <div className="card-header bg-white">
 
-                            <h4 className="mb-0">
-                                Edit Borrower
-                            </h4>
+                            <h4 className="mb-0">Edit Borrower</h4>
 
-                            <small className="text-muted">
-                                Update borrower details
-                            </small>
+                            <small className="text-muted">Update borrower details</small>
 
                         </div>
 
                         <div className="card-body">
 
                             {error && (
-
                                 <div className="alert alert-danger">
-
                                     <i className="bi bi-exclamation-triangle-fill me-2"></i>
-
                                     {error}
-
                                 </div>
-
                             )}
 
                             {success && (
-
                                 <div className="alert alert-success">
-
                                     <i className="bi bi-check-circle-fill me-2"></i>
-
                                     {success}
-
                                 </div>
-
                             )}
 
-                            <form
-                                onSubmit={handleSubmit}
-                            >
+                            <form onSubmit={handleSubmit}>
 
                                 <div className="row">
 
                                     <div className="col-md-6 mb-3">
-
-                                        <label className="form-label fw-semibold">
-                                            Name
-                                        </label>
-
+                                        <label className="form-label fw-semibold">Name</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -183,15 +141,10 @@ function EditBorrower() {
                                             onChange={handleChange}
                                             required
                                         />
-
                                     </div>
 
                                     <div className="col-md-6 mb-3">
-
-                                        <label className="form-label fw-semibold">
-                                            Email
-                                        </label>
-
+                                        <label className="form-label fw-semibold">Email</label>
                                         <input
                                             type="email"
                                             className="form-control"
@@ -200,19 +153,13 @@ function EditBorrower() {
                                             onChange={handleChange}
                                             required
                                         />
-
                                     </div>
-
                                 </div>
 
                                 <div className="row">
 
                                     <div className="col-md-6 mb-3">
-
-                                        <label className="form-label fw-semibold">
-                                            Phone Number
-                                        </label>
-
+                                        <label className="form-label fw-semibold">Phone Number</label>
                                         <input
                                             type="tel"
                                             className="form-control"
@@ -221,14 +168,11 @@ function EditBorrower() {
                                             onChange={handleChange}
                                             required
                                         />
-
                                     </div>
 
                                     <div className="col-md-6 mb-3">
 
-                                        <label className="form-label fw-semibold">
-                                            Department
-                                        </label>
+                                        <label className="form-label fw-semibold">Department</label>
 
                                         <select
                                             className="form-select"
@@ -238,26 +182,11 @@ function EditBorrower() {
                                             required
                                         >
 
-                                            <option value="CSE">
-                                                Computer Science
-                                            </option>
-
-                                            <option value="ECE">
-                                                Electronics
-                                            </option>
-
-                                            <option value="EEE">
-                                                Electrical
-                                            </option>
-
-                                            <option value="ME">
-                                                Mechanical
-                                            </option>
-
-                                            <option value="CE">
-                                                Civil
-                                            </option>
-
+                                            <option value="CSE">Computer Science</option>
+                                            <option value="ECE">Electronics</option>
+                                            <option value="EEE">Electrical</option>
+                                            <option value="ME">Mechanical</option>
+                                            <option value="CE">Civil</option>
                                         </select>
 
                                     </div>
@@ -266,15 +195,11 @@ function EditBorrower() {
 
                                 <div className="text-end">
 
-                                    <button
+                                    <button 
                                         className="btn btn-primary"
                                         disabled={saving}
                                     >
-
-                                        {saving
-                                            ? "Updating..."
-                                            : "Update Borrower"}
-
+                                        {saving ? "Updating...": "Update Borrower"}
                                     </button>
 
                                 </div>
