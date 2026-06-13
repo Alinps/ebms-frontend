@@ -8,6 +8,7 @@ import ProtectedRoute from "./features/auth/protectedRoute";
 import AddEquipment from "./pages/AddEquipment";
 import AddBorrower from "./pages/AddBorrower";
 import EditEquipment from "./pages/EditEquipment";
+import EditBorrower from "./pages/EditBorrower";
 import { useSelector } from "react-redux";
 
 function Dashboard() {
@@ -64,6 +65,11 @@ function App() {
                         <Route
                             path="/admin/edit-equipment/:id"
                             element={<EditEquipment />}
+                        />
+
+                        <Route
+                            path="/admin/edit-borrower/:id"
+                            element={<EditBorrower />}
                         />
 
                     </Route>

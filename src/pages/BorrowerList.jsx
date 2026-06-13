@@ -185,6 +185,7 @@ function BorrowerList() {
                     <button
                         className="btn btn-outline-warning btn-sm me-2"
                         title="Edit"
+                        onClick={()=> navigate(`/admin/edit-borrower/${borrower._id}`)}
                     >
                         <i className="bi bi-pencil-square"></i>
                     </button>
