@@ -14,6 +14,7 @@ import BorrowHistory from "./pages/BorrowHistory";
 import ActiveBorrowings from "./pages/ActiveBorrowings";
 import BorrowerHistory from "./pages/BorrowerHistory";
 import Dashboard from "./pages/Dashboard";
+import ViewEquipment from "./pages/EquipmentDetail";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -83,7 +84,11 @@ function App() {
                             path="/admin/dashboard/stats"
                             element={<Dashboard />}
                         />
-                    </Route>
+                        <Route
+                            path="/admin/view-equipment/:id"
+                            element={<ViewEquipment />}
+                        />
+                        </Route>
 
                 </Route>
 

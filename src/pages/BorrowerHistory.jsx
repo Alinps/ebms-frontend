@@ -10,18 +10,48 @@ function BorrowerHistory() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+
+    const [debounceSearch, setDebounceSearch] = useState('');
+    const [search, setSearch] = useState('');
+
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     
 
     useEffect(() => {
         fetchHistory();
-    }, []);
+    }, [debounceSearch, page]);
+
+
+
+        // function for updating the search state to collect date from the search input
+    const handleSearch = (e) => {
+
+        setSearch(e.target.value);
+        setPage(1);
+
+    }
+
+    // for applying a delay of 500 ms for every search input key strok to avoid multiple api calling
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+
+            setDebounceSearch(search);
+
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [search]);
+
+
 
     const fetchHistory = async () => {
 
         try {
 
             const response = await api.get(
-                `/borrow/borrower-records/${id}`
+                `/borrow/borrower-records/${id}?search=${debounceSearch}&page=${page}&limit=10`
             );
 
             setRecords(response.data.data);
@@ -138,6 +168,8 @@ function BorrowerHistory() {
 
                         <div className="card-body">
 
+                            
+
                             <h6 className="text-muted">
                                 Total Borrowings
                             </h6>
@@ -223,6 +255,27 @@ function BorrowerHistory() {
                 </div>
 
                 <div className="card-body">
+
+                                        <div className="row mb-3">
+
+                        <div className="col-md-4">
+
+                            <div className="input-group">
+                                <span className="input-group-text">
+                                    <i className="bi bi-search"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={search}
+                                    onChange={handleSearch}
+                                    placeholder="Search borrower..."
+                                />
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div className="table-responsive">
 
@@ -366,6 +419,64 @@ function BorrowerHistory() {
                 </div>
 
             </div>
+
+
+                {/* Pagination ui */}
+                <nav>
+                    <ul className="pagination justify-content-center mt-5">
+
+                        <li
+                            className={`page-item ${
+                                page === 1 ? 'disabled' : ''
+                            }`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => setPage(page - 1)}
+                            >
+                                Previous
+                            </button>
+                        </li>
+
+                        {[...Array(totalPages)].map((_, index) => (
+
+                            <li
+                                key={index}
+                                className={`page-item ${
+                                    page === index + 1
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() =>
+                                        setPage(index + 1)
+                                    }
+                                >
+                                    {index + 1}
+                                </button>
+                            </li>
+
+                        ))}
+
+                        <li
+                            className={`page-item ${
+                                page === totalPages
+                                    ? 'disabled'
+                                    : ''
+                            }`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => setPage(page + 1)}
+                            >
+                                Next
+                            </button>
+                        </li>
+
+                    </ul>
+                </nav>
 
         </div>
 

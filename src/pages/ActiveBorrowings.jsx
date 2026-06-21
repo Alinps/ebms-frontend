@@ -8,21 +8,26 @@ function ActiveBorrowings() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    
+
     useEffect(() => {
         fetchActiveBorrowings();
-    }, []);
+    }, [page]);
 
     const fetchActiveBorrowings = async () => {
 
         try {
 
             const response = await api.get(
-                "/borrow/borrow-records/active"
+                `/borrow/borrow-records/active?page=${page}&limit=10`
             );
 
             setRecords(
                 response.data.data
             );
+            setTotalPages(response.data.totalPages);
 
         } catch (error) {
 
@@ -174,6 +179,9 @@ function ActiveBorrowings() {
                             </div>
 
                         </div>
+
+
+                        {/* tabel ui */}
 
                     <div className="table-responsive">
 
@@ -343,6 +351,65 @@ function ActiveBorrowings() {
                 </div>
 
             </div>
+
+
+             {/* Pagination ui */}
+                <nav>
+                    <ul className="pagination justify-content-center mt-5">
+
+                        <li
+                            className={`page-item ${
+                                page === 1 ? 'disabled' : ''
+                            }`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => setPage(page - 1)}
+                            >
+                                Previous
+                            </button>
+                        </li>
+
+                        {[...Array(totalPages)].map((_, index) => (
+
+                            <li
+                                key={index}
+                                className={`page-item ${
+                                    page === index + 1
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() =>
+                                        setPage(index + 1)
+                                    }
+                                >
+                                    {index + 1}
+                                </button>
+                            </li>
+
+                        ))}
+
+                        <li
+                            className={`page-item ${
+                                page === totalPages
+                                    ? 'disabled'
+                                    : ''
+                            }`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => setPage(page + 1)}
+                            >
+                                Next
+                            </button>
+                        </li>
+
+                    </ul>
+                </nav>
+
 
         </div>
 

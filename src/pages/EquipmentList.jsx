@@ -233,9 +233,13 @@ function EquipmentList() {
 
                                         <div className="d-flex justify-content-center gap-2">
 
-                                            <button
+                                         <button
                                                 className="btn btn-outline-primary btn-sm"
-                                                title="View"
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/admin/view-equipment/${equipment._id}`
+                                                    )
+                                                }
                                             >
                                                 <i className="bi bi-eye"></i>
                                             </button>
