@@ -184,7 +184,7 @@ function BorrowHistory() {
 
                                             <td>{new Date(record.expectedReturnDate).toLocaleDateString()}</td>
 
-                                            <td>{new Date(record.actualReturnDate).toLocaleDateString()}</td>
+                                            <td>{record.actualReturnDate?  new Date(record.actualReturnDate).toLocaleDateString(): "not returned"}</td>
 
                                             <td>
                                                 <span

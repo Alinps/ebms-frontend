@@ -168,7 +168,7 @@ function BorrowerList() {
                                         colSpan="8"
                                         className="text-center text-muted py-4"
                                     >
-                                        No active borrowings found
+                                        No active borrowers found
                                     </td>
                                 </tr>
 
